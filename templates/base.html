@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Setting Page Title -->
+		{% if title %}
+		<title>{{ title }} - Student Service System</title>
+
+		{% else %}
+		<title>Student Service System</title>
+		{% endif %}
+		
+		<!-- Bootstrap/JS -->
+		<link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ url_for('static', filename='css/simple-sidebar.css') }}" rel="stylesheet" type="text/css">
+		<script src="{{ url_for('static', filename='js/jquery-3.1.0.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	</head>
+
+	<body>
+		{% include 'navbar_fixed_top.html' %}
+
+		<!-- Page Wrapper -->
+		<div id="wrapper">
+
+			<!-- Sidebar -->
+			{% include 'sidebar.html' %}
+
+			<!-- Debug Messages ### REMOVE ON PRODUCTION ### -->
+			<div>
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						<ul>
+						{% for message in messages %}
+							<li>{{ message }}</li>
+						{% endfor %}
+						</ul>
+					{% endif %}
+				{% endwith %}
+			</div>
+
+			<!-- Page Content -->
+			<div id="page-content-wrapper">
+				{% block content %}
+				{% endblock %}
+			</div>
+			<!-- End Page Content -->
+
+		</div> <!-- End Wrapper -->
+	</body>
+
+	<!-- Menu Toggle Script -->
+	<script>
+	$("#menu-toggle").click(function(e) {
+		e.preventDefault();
+		$("#wrapper").toggleClass("toggled");
+	});
+	</script>
+
+</html>
