@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	outline: none;
+}
+
+body {
+	background: url(../images/login_background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#create-account-box {
+	margin: 100px auto;
+	max-width: 400px;
+}
+
+#form-links {
+	text-align: center;
+	margin-top: 0.5em;
+}
+	#form-links a {
+	}
+
+#input-error {
+	color: #e83d3d;
+}
+
+#flashed_messages {
+	margin-top: 10px;
+}
+
+form[name=create_account] {
+	color: #5d5d5d;
+	background: #f2f2f2;
+	padding: 26px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+	form[name=create_account] h1 {
+		text-align: center;
+		margin-top: 5px;
+	}
+	form[name=create_account] h3 {
+		text-align: center;
+		margin-top: 5px;
+		margin-bottom: 20px;
+	}
+	form[name=create_account] img {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 35px;
+	}
+	form[name=create_account] .input-group, .input-lg {
+		font-size: 18px;
+		margin: 10px 0 4px;
+	}
+	form[name=create_account] span[class=input-group-addon] {
+		font-size: 16px;
+	}
+	form[name=create_account] input[type=submit] {
+		margin: 20px 0 4px;
+	}
+	form[name=create_account] button {
+		font-size: 18px;
+		margin: 16px 0;
+	}

@@ -102,6 +102,25 @@
     background: none;
 }
 
+.sidebar-submenu li a {
+    background: #222;
+    padding-left: 0px;
+}
+
+.sidebar-subsubmenu li a {
+    background: #2a2a2a;
+    padding-left: 10px;
+}
+
+.sidebar-subsubsubmenu li {
+    line-height: 32px;
+}
+
+.sidebar-subsubsubmenu li a {
+    background: #333;
+    padding-left: 20px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         margin-top:; 51px;

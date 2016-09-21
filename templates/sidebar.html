@@ -1,31 +1,39 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-		<li class="sidebar-brand">
-			<a href="#">
-				Student Service System
-			</a>
-		</li>
+	<ul class="sidebar-nav list-group-panel" id="main_menu">
+		<li class="sidebar-brand"><a href="{{ url_for('index') }}">Student Service System</a></li>
 
-		<li>
-			<a href="#">Dashboard</a>
-		</li>
+		<li><a href="#">Dashboard</a></li>
 
-		<li>
-			<a href="#">Groups</a>
-		</li>
+		<!-- New Groups -->
+		<li><a href="#groups_submenu" data-toggle="collapse" data-parent="main_menu">Groups</a></li>
+		<div class="collapse sidebar-submenu" id="groups_submenu">
+			
+			{% for group in current_user.get_groups() %}
 
-		<li>
-			<a href="#">Posts</a>
-		</li>
+				<li><a href="#group_{{ group.GroupID }}" data-toggle="collapse" data-parent="groups_submenu">{{ group.Name }}</a></li>
+				<div class="collapse sidebar-subsubmenu" id="group_{{ group.GroupID }}">
+					
+					<li><a href="#group_{{ group.GroupID }}_members" data-toggle="collapse" data-parent="group_{{ group.GroupID }}">Members</a></li>
+					<div class="collapse sidebar-subsubsubmenu" id="group_{{ group.GroupID }}_members">
 
-		<li>
-			<a href="#">Roster</a>
-		</li>
+						{% for member in group.get_members() %}
+							<li><a href="#">{{ member.FirstName }} {{ member.LastName }}</a></li>
+						{% endfor %}
 
-		<li>
-			<a href="#">Awards</a>
-		</li>
+					</div>
+				</div>
+
+			{% endfor %}
+
+		</div>
+		<!-- End Groups -->
+
+		<li><a href="#">Posts</a></li>
+
+		<li><a href="#">Roster</a></li>
+
+		<li><a href="#">Awards</a></li>
 	</ul>
 </div>
 <!-- End Sidebar -->

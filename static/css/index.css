@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.panel-body {
+	padding-bottom: 25px;
+}
+
+#recent-posts .panel {
+	margin: 10px 0px;
+}
+
+form[name=create-post-any-group] .input-group, .input-md {
+	margin: 6px 0px;
+}

@@ -1,0 +1,44 @@
+{% extends "bare_base.html" %}
+
+{% block custom_css %}
+<link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div id="login-box">
+		<!-- Login Form -->
+		<form action="" method="post" name="login">
+			{{ form.hidden_tag() }}
+			
+			<h1>Burnside High School</h1>
+			<h3>Student Service System</h3>
+
+			{{ form.username(size=10, class_="form-control input-lg", placeholder="Username") }}
+			{% for error in form.username.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			{{ form.password(class_="form-control input-lg", placeholder="Password") }}
+			{% for error in form.password.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			{{ form.remember_me }} Remember Me
+			
+			<input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In">
+
+			<div id="form-links">
+				<a href="{{ url_for('forgot_password') }}">Forgot your password?</a>
+				<a href="{{ url_for('create_account') }}">Create an account</a>
+			</div>
+
+			{% include 'flashed_messages.html' %}
+			
+		</form>
+		<!-- End Login Form -->
+	</div>
+</div>
+
+{% endblock %}

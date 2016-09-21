@@ -1,14 +1,70 @@
 {% extends "base.html" %}
+
+{% block custom_css %}
+<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block content %}
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-sm-12 col-md-12 col-lg-12" id="top-info">
 			<h1>Home Page</h1>
 			
 			<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+		</div><!-- End Top Info -->
 
-		</div> <!-- End col-lg-12 -->
+		<div class="col-sm-12 col-md-6 col-lg-6" id="recent-posts">
+			<h2>Posts from my Groups</h2>
+			
+			{% for post in recent_posts %}
+				<div class="panel panel-default">
+
+					<div class="panel-heading">
+						<span>{{ post.Title }}</span>
+						<span class="pull-right">by <a href="{{ url_for('user', UserID=post.UserID) }}">{{ post.Author.FirstName }} {{ post.Author.LastName }}</a></span>
+					</div>
+					
+					<div class="panel-body">
+						{{ post.Body }}
+					</div>
+
+					<div class="panel-footer">
+						Posted to <a href="{{ url_for('group', GroupID=post.GroupID) }}">{{ post.GroupPostedTo.Name }}</a> {{ format_local_time(post.DateTimePosted) }}
+					</div>
+
+				</div>
+			{% endfor %}
+		</div><!-- End Recent Posts -->
+
+		<div class="col-sm-12 col-md-6 col-lg-6" id="create-post">
+			<h2>Write a Post</h2>
+
+			<form action="" method="post" name="create-post-any-group">
+				{{ post_form.hidden_tag() }}
+
+				<div class="input-group input-group-md">
+					<span class="input-group-addon">Post to</span>
+					{{ post_form.group(class_="form-control") }}
+				</div>
+				{% for error in post_form.group.errors %}
+				<span id="input-error">{{ error }}<br></span>
+				{% endfor %}
+
+				{{ post_form.title(class_="form-control input-md", placeholder="Title") }}
+
+				{{ post_form.body(class_="form-control input-md", placeholder="Write your post here") }}
+
+				<input type="submit" class="btn btn-md btn-primary btn-block" value="Submit Post">
+				
+			</form>
+
+			<!-- Debug Messages ### REMOVE ON PRODUCTION ### -->
+			{% include 'flashed_messages.html' %}
+			<!-- End Debug Messages -->
+			
+		</div> <!-- End Create Post -->
+
 	</div> <!-- End row -->
 </div> <!-- End container-fluid -->
 

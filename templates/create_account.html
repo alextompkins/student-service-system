@@ -1,0 +1,79 @@
+{% extends "bare_base.html" %}
+
+{% block custom_css %}
+<link href="{{ url_for('static', filename='css/create_account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div id="create-account-box">
+		
+		<!-- Create Account Form -->
+		<form class="form-horizontal" action="" method="post" name="create_account">
+			{{ form.hidden_tag() }}
+
+			<h1>Burnside High School</h1>
+			<h3>Student Service System</h3>
+
+			<h3>Create an Account</h3>
+
+			<div class="input-group input-group-lg">
+				{{ form.user_id(class_="form-control", placeholder="User ID") }}
+				<span class="input-group-addon">@burnside.school.nz</span>
+			</div>
+			{% for error in form.user_id.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			{{ form.password(class_="form-control input-lg", placeholder="Password") }}
+			{% for error in form.password.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			{{ form.reenter_password(class_="form-control input-lg", placeholder="Re-enter Password") }}
+			{% for error in form.reenter_password.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			{{ form.first_name(class_="form-control input-lg", placeholder="First Name") }}
+			{% for error in form.first_name.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			{{ form.last_name(class_="form-control input-lg", placeholder="Last Name") }}
+			{% for error in form.last_name.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			<div class="input-group input-group-lg">
+				<span class="input-group-addon">User Type</span>
+				{{ form.user_type(class_="form-control") }}
+			</div>
+			{% for error in form.user_type.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			<div class="input-group input-group-lg">
+				<span class="input-group-addon">Year Level</span>
+				{{ form.year_level(class_="form-control") }}
+			</div>
+			{% for error in form.year_level.errors %}
+				<span id="input-error">{{ error }}<br></span>
+			{% endfor %}
+
+			<input type="submit" class="btn btn-lg btn-primary btn-block" value="Create Account">
+
+			<div id="form-links">
+				<a href="{{ url_for('login') }}">Just need to log in?</a>
+				<a href="{{ url_for('forgot_password') }}">Forgot your password?</a>
+			</div>
+
+			{% include 'flashed_messages.html' %}
+
+		</form>
+
+	</div>
+</div>
+
+{% endblock %}
