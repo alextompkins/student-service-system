@@ -57,7 +57,8 @@ form[name=create_account] {
 		margin: 0 auto;
 		margin-bottom: 35px;
 	}
-	form[name=create_account] .input-group, .input-lg {
+	form[name=create_account] .input-group, 
+	form[name=create_account] .input-lg {
 		font-size: 18px;
 		margin: 10px 0 4px;
 	}

@@ -3,7 +3,7 @@
 	<ul class="sidebar-nav list-group-panel" id="main_menu">
 		<li class="sidebar-brand"><a href="{{ url_for('index') }}">Student Service System</a></li>
 
-		<li><a href="#">Dashboard</a></li>
+		<li><a href="{{ url_for('index') }}">Dashboard</a></li>
 
 		<!-- New Groups -->
 		<li><a href="#groups_submenu" data-toggle="collapse" data-parent="main_menu">Groups</a></li>
@@ -14,11 +14,13 @@
 				<li><a href="#group_{{ group.GroupID }}" data-toggle="collapse" data-parent="groups_submenu">{{ group.Name }}</a></li>
 				<div class="collapse sidebar-subsubmenu" id="group_{{ group.GroupID }}">
 					
+					<li><a href="{{ url_for('group', GroupID=group.GroupID) }}">View Group Page</a></li>
+
 					<li><a href="#group_{{ group.GroupID }}_members" data-toggle="collapse" data-parent="group_{{ group.GroupID }}">Members</a></li>
 					<div class="collapse sidebar-subsubsubmenu" id="group_{{ group.GroupID }}_members">
 
 						{% for member in group.get_members() %}
-							<li><a href="#">{{ member.FirstName }} {{ member.LastName }}</a></li>
+							<li><a href="{{ url_for('user', UserID=member.UserID) }}">{{ member.FirstName }} {{ member.LastName }}</a></li>
 						{% endfor %}
 
 					</div>

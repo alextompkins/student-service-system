@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField 
+from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField, HiddenField
 from wtforms.validators import InputRequired, EqualTo, AnyOf
 
 
@@ -32,3 +32,7 @@ class CreatePostAnyGroupForm(Form):
 	group = SelectField(u'group',)
 	title = StringField('title', validators=[InputRequired(message="Your post needs a title.")])
 	body = TextAreaField('body', validators=[InputRequired(message="Your post must say something.")])
+
+class PostCommentForm(Form):
+	parent_post_id = StringField('parent_post_id')
+	body = StringField('body', validators=[InputRequired(message="Your comment must say something.")])

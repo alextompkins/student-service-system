@@ -17,6 +17,7 @@ class User(db.Model):
 	LastSeen = db.Column(db.DateTime)
 	MemberLinks = db.relationship('MemberLink', backref='Member', lazy='dynamic')
 	Posts = db.relationship('Post', backref='Author', lazy='dynamic')
+	Comments = db.relationship('PostComment', backref='Author', lazy='dynamic')
 	Applications = db.relationship('Application', backref='Author', lazy='dynamic')
 
 	@property
@@ -151,7 +152,7 @@ class PostComment(db.Model):
 
 	PostCommentID = db.Column(db.Integer, primary_key=True)
 	ParentPostID = db.Column(db.Integer, db.ForeignKey('Post.PostID'), nullable=False)
-	AuthorID = db.Column(db.Integer, db.ForeignKey('User.UserID'), nullable=False)
+	AuthorID = db.Column(db.String(10), db.ForeignKey('User.UserID'), nullable=False)
 	DateTimeCommented = db.Column(db.DateTime, nullable=False, index=True)
 	Body = db.Column(db.String(1000))
 
@@ -170,7 +171,7 @@ class Application(db.Model):
 
 	ApplicationID = db.Column(db.Integer, primary_key=True)
 	GroupID = db.Column(db.Integer, db.ForeignKey('ServiceGroup.GroupID'), nullable=False)
-	UserID = db.Column(db.Integer, db.ForeignKey('User.UserID'), nullable=False)
+	UserID = db.Column(db.String(10), db.ForeignKey('User.UserID'), nullable=False)
 	Parts = db.relationship('ApplicationPart', backref='ParentApplication', lazy='dynamic')
 
 	def __repr__(self):

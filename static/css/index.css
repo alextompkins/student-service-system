@@ -1,13 +1,62 @@
 @CHARSET "UTF-8";
 
-.panel-body {
-	padding-bottom: 25px;
+#post .panel-body {
+	padding-bottom: 20px;
+}
+
+#post .panel-footer {
+	color: #666;
+	font-size: 10pt;
 }
 
 #recent-posts .panel {
-	margin: 10px 0px;
+	margin: 12px 0px;
 }
 
-form[name=create-post-any-group] .input-group, .input-md {
-	margin: 6px 0px;
+#comments {
+	font-size: 9pt;
+}
+
+.new-comment {
+	padding: 10px 15px;
+	margin-bottom: -1px;
+	background-color: #FFF;
+	border: 1px solid #DDD;
+	border-width: 1px 0;
+	border-radius: 0;
+	font-size: 9pt;
+}
+
+#post-tools a:hover, 
+#post-tools a:active, 
+#post-tools a:focus, 
+#comment-tools a:hover, 
+#comment-tools a:active,
+#comment-tools a:focus {
+	text-decoration: none;
+}
+
+#comment-header {
+	display: block;
+	margin-bottom: 6px;
+	color: #444
+}
+
+#comment-body {
+	margin-bottom: 4px;
+}
+
+#create-post .input-group, 
+#create-post .input-md, 
+#create-post .btn {
+	margin: 6px 0px 0px 0px;
+}
+
+#input-error {
+	color: #e83d3d;
+	font-size: 10pt;
+}
+
+#flashed_messages {
+	margin: 10px 0px;
 }
