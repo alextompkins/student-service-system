@@ -1,7 +1,7 @@
 # Importing Flask, SQLAlchemy and LoginManager
 from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 # Flask App and SQLAlchemy Initialisation
 app = Flask(__name__)
