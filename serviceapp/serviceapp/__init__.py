@@ -5,7 +5,7 @@ from flask.ext.login import LoginManager
 
 # Flask App and SQLAlchemy Initialisation
 app = Flask(__name__)
-app.config.from_object('serviceapp_config')
+app.config.from_object('config')
 db = SQLAlchemy(app)
 
 # Login Manager Initialisation
@@ -14,9 +14,11 @@ login_manager.login_view = "login"
 login_manager.login_message_category = "message"
 login_manager.init_app(app)
 
-# Starting App
+# Load views, models
 from serviceapp import views, models
 
-app.run(
-	debug=True
-)
+# Start Flask app
+if __name__ == '__main__':
+	app.run(
+		debug=True
+	)
