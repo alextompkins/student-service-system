@@ -3,7 +3,6 @@ from datetime import datetime
 
 
 # Table Definitions
-
 class User(db.Model):
 	"""Table defining Users"""
 	__tablename__ = "User"
@@ -102,6 +101,7 @@ class MemberLink(db.Model):
 		return '<MemberLink ID {} linking UserID {} with GroupID {}>'.format(self.MemberLinkID, self.UserID, self.GroupID)
 
 class ServiceRecord(db.Model):
+	"""Table defining records of school service"""
 	__tablename__ = "ServiceRecord"
 
 	"""Table for recording service hours"""
@@ -135,6 +135,9 @@ class Post(db.Model):
 	Title = db.Column(db.String(100))
 	Body = db.Column(db.String(10000))
 	Comments = db.relationship('PostComment', backref='ParentPost', lazy='dynamic')
+
+	def get_body_lines(self):
+		return self.Body.split('\n')
 
 	def __init__(self, GroupID, UserID, Title, Body):
 		self.GroupID = GroupID

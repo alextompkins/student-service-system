@@ -33,7 +33,9 @@
 					</div>
 					
 					<div class="panel-body">
-						{{ post.Body }}
+						{% for line in post.get_body_lines() %}
+							<p>{{ line }}</p>
+						{% endfor %}
 					</div>
 
 					{% if post.Comments.count() > 0 %}

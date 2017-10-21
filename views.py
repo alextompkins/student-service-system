@@ -23,7 +23,7 @@ def hash_password(password, salt=None):
 
 def check_credentials(username, password):
 	"""Returns True if the input credentials match the credentials of the user in the 
-	database, False if they do not or if user does not exist in the database"""
+	database, False if they do not or if user does not exist in the database."""
 	matching_user = User.query.filter(User.UserID == username).first()
 	if matching_user:
 		matching_hash, salt = matching_user.Password.split(':')
@@ -32,6 +32,8 @@ def check_credentials(username, password):
 		return False
 
 def get_recent_posts(user):
+	"""Returns a tuple containing all of the posts from the current user's groups, sorted 
+	backwards by date/time they were posted."""
 	recent_posts = []
 	for group in user.get_groups():
 		for post in group.Posts:
@@ -40,6 +42,8 @@ def get_recent_posts(user):
 	return sorted(recent_posts, key=lambda x: x.DateTimePosted)[::-1]
 
 def format_local_time(utc_timestamp):
+	"""Returns a formatted string of the given UTC date/time, converted to local timezone 
+	and in a format based on how long ago versus current date/time."""
 	local_timestamp = utc_timestamp.replace(tzinfo=utc).astimezone(LOCAL_TIMEZONE)
 	current_timestamp = datetime.now(LOCAL_TIMEZONE)
 	time_part = "{dt:%I}:{dt:%M} {dt:%p}".format(dt=local_timestamp).lstrip('0')
@@ -55,7 +59,7 @@ def format_local_time(utc_timestamp):
 		else:
 			return "{}, {dt:%A} {dt.day} {dt:%B}".format(time_part, dt=local_timestamp)
 	else:
-		return "{}, {dt:%A}, {dt.day} {dt:%B} {dt:%Y}".format(time_part, local_timestamp)
+		return "{}, {dt:%A}, {dt.day} {dt:%B} {dt:%Y}".format(time_part, dt=local_timestamp)
 
 
 # Views
@@ -85,7 +89,7 @@ def index():
 		elif comment_form.validate_on_submit():
 			new_comment = PostComment(comment_form.parent_post_id.data,
 									current_user.UserID,
-									post_form.body.data)
+									comment_form.body.data)
 
 			db.session.add(new_comment)
 			db.session.commit()
@@ -182,6 +186,11 @@ def post(PostID):
 	return redirect(url_for('index'))
 
 @login_required
+@app.route('/join_group/<GroupID>')
+def join_group(GroupID):
+	current_user.join_group(GroupID)
+
+@login_required
 @app.route('/delete/<Type>/<ID>')
 def delete(Type, ID):
 	if Type == 'Post':
@@ -208,8 +217,10 @@ def load_user(UserID):
 	return User.query.get(UserID)
 
 
+# Prior to page load
 @app.before_request
 def before_request():
+	"""Processing before each page is loaded, including setting user's LastSeen."""
 	if current_user.is_authenticated:
 		current_user.LastSeen = datetime.utcnow()
 		db.session.add(current_user)

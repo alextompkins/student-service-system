@@ -15,6 +15,7 @@
 				<div class="collapse sidebar-subsubmenu" id="group_{{ group.GroupID }}">
 					
 					<li><a href="{{ url_for('group', GroupID=group.GroupID) }}">View Group Page</a></li>
+					<li><a href="{{ url_for('join_group', GroupID=group.GroupID) }}">Join Group</a></li>
 
 					<li><a href="#group_{{ group.GroupID }}_members" data-toggle="collapse" data-parent="group_{{ group.GroupID }}">Members</a></li>
 					<div class="collapse sidebar-subsubsubmenu" id="group_{{ group.GroupID }}_members">

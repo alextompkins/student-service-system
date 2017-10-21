@@ -3,6 +3,7 @@ from wtforms import StringField, PasswordField, BooleanField, SelectField, TextA
 from wtforms.validators import InputRequired, EqualTo, AnyOf
 
 
+# Form Definitions
 class LoginForm(Form):
 	username = StringField('username', validators=[InputRequired(message="Username required.")])
 	password = PasswordField('password', validators=[InputRequired(message="Password required.")])
