@@ -1,4 +1,4 @@
 @echo off
-cd Python35
-python ..\serviceapp\run.py
-PAUSE
+cd ..\python36-flask-win
+python ..\student-service-system\serviceapp\run.py
+pause
