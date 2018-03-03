@@ -46,8 +46,11 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
+# IDEA
+.idea/*
+*.iml
 
 # Custom Ignores
 /Python*
-__pycache__/
+*__pycache__/*
+*venv/*
