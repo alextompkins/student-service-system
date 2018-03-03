@@ -1,15 +1,15 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SelectField, TextAreaField, HiddenField
 from wtforms.validators import InputRequired, EqualTo, AnyOf
 
 
 # Form Definitions
-class LoginForm(Form):
+class LoginForm(FlaskForm):
 	username = StringField('username', validators=[InputRequired(message="Username required.")])
 	password = PasswordField('password', validators=[InputRequired(message="Password required.")])
 	remember_me = BooleanField('remember_me', default=False)
 
-class CreateAccountForm(Form):
+class CreateAccountForm(FlaskForm):
 	user_id = StringField('user_id', validators=[InputRequired(message="Username required.")])
 	password = PasswordField('password', validators=[InputRequired(message="Password required.")])
 	reenter_password = PasswordField('reenter_password', validators=[EqualTo('password', message="Passwords must match.")])
@@ -29,11 +29,11 @@ class CreateAccountForm(Form):
 		('13', '13'), 
 		])
 
-class CreatePostAnyGroupForm(Form):
+class CreatePostAnyGroupForm(FlaskForm):
 	group = SelectField(u'group',)
 	title = StringField('title', validators=[InputRequired(message="Your post needs a title.")])
 	body = TextAreaField('body', validators=[InputRequired(message="Your post must say something.")])
 
-class PostCommentForm(Form):
+class PostCommentForm(FlaskForm):
 	parent_post_id = StringField('parent_post_id')
 	body = StringField('body', validators=[InputRequired(message="Your comment must say something.")])
